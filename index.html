@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Визуализация и сравнение данных по зонам</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Визуализация и сравнение данных по зонам</h1>
+        
+        <div class="upload-section">
+            <label for="file-upload" class="upload-btn">Выбрать CSV файл</label>
+            <input type="file" id="file-upload" accept=".csv">
+            <div class="file-info" id="file-info">Файл не выбран</div>
+        </div>
+        
+        <div id="controls-container" class="hidden">
+            <div class="modes">
+                <h3>Режим отображения:</h3>
+                <div class="mode-switch">
+                    <button id="single-mode" class="mode-btn active">Одна дата</button>
+                    <button id="compare-mode" class="mode-btn">Сравнение двух дат</button>
+                </div>
+                
+                <div class="mode-switch">
+                    <button id="zone-mode" class="mode-btn active">Отдельные зоны</button>
+                    <button id="area-mode" class="mode-btn">Группы зон (улицы)</button>
+                </div>
+            </div>
+            
+            <div id="single-date-controls" class="controls">
+                <div class="control-group">
+                    <label for="date-select">Выберите дату:</label>
+                    <select id="date-select"></select>
+                </div>
+            </div>
+            
+            <div id="compare-dates-controls" class="comparison-controls hidden">
+                <div class="date-control">
+                    <label for="date-select-1">Первая дата:</label>
+                    <select id="date-select-1"></select>
+                </div>
+                <div class="date-control">
+                    <label for="date-select-2">Вторая дата:</label>
+                    <select id="date-select-2"></select>
+                </div>
+            </div>
+            
+            <div class="selection-container" id="zones-selection-container">
+                <h3 id="selection-title">Выберите зоны для отображения:</h3>
+                <div class="selection-options" id="zones-selection"></div>
+            </div>
+            
+            <div class="selection-container hidden" id="areas-selection-container">
+                <h3>Выберите группы зон для отображения:</h3>
+                <div class="selection-options" id="areas-selection"></div>
+            </div>
+        </div>
+        
+        <div id="loading" class="loading hidden">Загрузка данных...</div>
+        <div id="no-data" class="no-data">Загрузите CSV файл для отображения данных</div>
+        
+        <div class="charts-wrapper hidden" id="charts-wrapper">
+            <div class="chart-container" id="chart-container">
+                <canvas id="dataChart"></canvas>
+            </div>
+            <div class="bar-chart-container hidden" id="bar-chart-container">
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
